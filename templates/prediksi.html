@@ -11,77 +11,2071 @@
   <!-- End Section Title -->
 
   <div class="container">
-    <form action="#" method="POST">
+    <form action="{{ url_for('prediksi') }}" method="POST">
       <div class="row">
-        <!-- Kolom Kiri -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nama"
-              name="nama"
-              placeholder="Masukkan nama"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              placeholder="Masukkan email"
-            />
-          </div>
-
-          <div class="mb-3">
-            <label for="no_telp" class="form-label">No. Telepon</label>
-            <input
-              type="text"
-              class="form-control"
-              id="no_telp"
-              name="no_telp"
-              placeholder="Masukkan nomor telepon"
-            />
+        <!-- Nama -->
+        <div class="col-12 mb-3">
+          <label for="nama" class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama lengkap" required />
+          <div class="form-text">
+            Masukkan nama lengkap ibu hamil/ibu nifas.
           </div>
         </div>
 
-        <!-- Kolom Kanan -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <textarea
-              class="form-control"
-              id="alamat"
-              name="alamat"
-              rows="5"
-              placeholder="Masukkan alamat"
-            ></textarea>
-          </div>
-
-          <div class="mb-3">
-            <label for="keterangan" class="form-label">Keterangan</label>
-            <textarea
-              class="form-control"
-              id="keterangan"
-              name="keterangan"
-              rows="5"
-              placeholder="Masukkan keterangan"
-            ></textarea>
+        <!-- Usia -->
+        <div class="col-12 mb-3">
+          <label for="p1" class="form-label">Usia</label>
+          <input type="number" class="form-control" id="p1" name="p1" placeholder="Masukkan usia Anda" required />
+          <div class="form-text">
+            Usia ibu hamil/ ibu nifas dihitung berdasarkan tahun dari tanggal
+            lahir hingga saat pemeriksaan kehamilan.
           </div>
         </div>
-      </div>
 
-      <!-- Tombol -->
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-      </div>
+        <!-- Paritas -->
+        <div class="col-12 mb-3">
+          <label for="p2" class="form-label">
+            Apakah ini merupakan kehamilan pertama?
+          </label>
+
+          <select class="form-select" id="p2" name="p2" required>
+            <option value="" selected disabled>Pilih jawaban</option>
+            <option value="1">Ya, kehamilan pertama</option>
+            <option value="0">Tidak, sudah pernah hamil sebelumnya</option>
+          </select>
+
+          <div class="form-text">
+            Jumlah kehamilan yang pernah dialami ibu, termasuk kehamilan saat
+            ini.
+          </div>
+        </div>
+
+        <!-- Riwayat Hipertensi -->
+        <div class="col-12 mb-3">
+          <label for="p3" class="form-label">
+            Apakah Anda memiliki riwayat tekanan darah tinggi sebelum kehamilan
+            atau pada kehamilan sebelumnya?
+          </label>
+
+          <select class="form-select" id="p3" name="p3" required>
+            <option value="" selected disabled>Pilih jawaban</option>
+            <option value="1">Ada</option>
+            <option value="0">Tidak ada</option>
+          </select>
+
+          <div class="form-text">
+            Pilih "Ada" jika pernah memiliki tekanan darah tinggi sebelum
+            kehamilan atau pada kehamilan sebelumnya.
+          </div>
+        </div>
+
+        <!-- Riwayat Preeklampsia Keluarga -->
+        <div class="col-12 mb-3">
+          <label for="p4" class="form-label">
+            Apakah ibu kandung, saudara perempuan kandung, atau nenek dari pihak
+            ibu pernah mengalami preeklampsia saat hamil?
+          </label>
+
+          <select class="form-select" id="p4" name="p4" required>
+            <option value="" selected disabled>Pilih jawaban</option>
+            <option value="1">Ada</option>
+            <option value="0">Tidak ada</option>
+          </select>
+
+          <div class="form-text">
+            Pilih "Ada" jika ibu kandung, saudara perempuan kandung
+            (kakak/adik), atau nenek dari pihak ibu pernah didiagnosis
+            preeklampsia saat hamil.
+          </div>
+        </div>
+
+        <!-- Pola Istirahat -->
+        <div class="col-12 mb-3">
+
+          <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#p5-collapse" aria-expanded="false" aria-controls="p5-collapse">
+
+            <strong>Pola Istirahat</strong>
+            <span>▼</span>
+          </button>
+
+          <div class="collapse mt-3" id="p5-collapse">
+
+            <div class="alert alert-info">
+              Jawablah pertanyaan sesuai dengan kondisi tidur Anda
+              dalam 1 bulan terakhir.
+            </div>
+
+            <!-- TABEL POLA ISTIRAHAT -->
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle">
+
+                <thead class="table-light text-center">
+                  <tr>
+                    <th width="5%">No</th>
+                    <th>Pertanyaan</th>
+                    <th width="10%">0</th>
+                    <th width="10%">1</th>
+                    <th width="10%">2</th>
+                    <th width="10%">3</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!-- 1 -->
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td>
+                      <strong>Kualitas tidur subjektif</strong><br>
+                      Bagaimana kualitas tidur Anda dalam 1 bulan terakhir?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kualitas" value="0" required>
+                      <br>Sangat baik
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kualitas" value="1">
+                      <br>Baik
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kualitas" value="2">
+                      <br>Buruk
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kualitas" value="3">
+                      <br>Sangat buruk
+                    </td>
+                  </tr>
+
+
+                  <!-- 2 -->
+                  <tr>
+                    <td class="text-center">2</td>
+
+                    <td>
+                      Rata-rata berapa menit waktu yang dibutuhkan
+                      untuk tertidur setelah berbaring?
+                      <input type="number" class="form-control mt-2" name="p5_menit_tidur" placeholder="Menit" min="0"
+                        required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_latensi" value="0" required>
+                      <br>≤15 menit
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_latensi" value="1">
+                      <br>16–30 menit
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_latensi" value="2">
+                      <br>31–60 menit
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_latensi" value="3">
+                      <br>>60 menit
+                    </td>
+                  </tr>
+
+
+                  <!-- 3 -->
+                  <tr>
+                    <td class="text-center">3</td>
+
+                    <td>
+                      Seberapa sering Anda sulit tidur
+                      dalam 1 bulan terakhir?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kesulitan_tidur" value="0" required>
+                      <br>Tidak pernah
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kesulitan_tidur" value="1">
+                      <br>&lt;1 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kesulitan_tidur" value="2">
+                      <br>1–2 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_kesulitan_tidur" value="3">
+                      <br>≥3 kali/minggu
+                    </td>
+                  </tr>
+
+
+                  <!-- 4 -->
+                  <tr>
+                    <td class="text-center">4</td>
+
+                    <td>
+                      Berapa jam tidur rata-rata setiap malam
+                      dalam 1 bulan terakhir?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_durasi" value="0" required>
+                      <br>&gt;7 jam
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_durasi" value="1">
+                      <br>6–7 jam
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_durasi" value="2">
+                      <br>5–6 jam
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_durasi" value="3">
+                      <br>&lt;5 jam
+                    </td>
+                  </tr>
+
+
+                  <!-- 5 -->
+                  <tr>
+                    <td class="text-center">5</td>
+
+                    <td>
+                      Jam berapa Anda biasanya mulai tidur
+                      di malam hari?
+                      <input type="time" class="form-control mt-2" name="p5_jam_tidur" required>
+                    </td>
+
+                    <td colspan="4" class="text-center">
+                      Digunakan untuk menghitung efisiensi tidur
+                    </td>
+                  </tr>
+
+
+                  <!-- 6 -->
+                  <tr>
+                    <td class="text-center">6</td>
+
+                    <td>
+                      Jam berapa Anda biasanya bangun
+                      di pagi hari?
+                      <input type="time" class="form-control mt-2" name="p5_jam_bangun" required>
+                    </td>
+
+                    <td colspan="4" class="text-center">
+                      Digunakan untuk menghitung efisiensi tidur
+                    </td>
+                  </tr>
+
+
+                  <!-- 7 -->
+                  <tr>
+                    <td class="text-center">7</td>
+
+                    <td>
+                      Berapa jam Anda benar-benar tidur rata-rata setiap malam?
+                      <input type="number" step="0.1" class="form-control mt-2" name="p5_tidur_nyenyak"
+                        placeholder="Jam" min="0" required>
+                    </td>
+
+                    <td colspan="4" class="text-center">
+                      Digunakan untuk menghitung efisiensi tidur
+                    </td>
+                  </tr>
+
+
+                  <!-- 8 -->
+                  <tr>
+                    <td class="text-center">8</td>
+
+                    <td>
+                      <strong>Efisiensi tidur</strong><br>
+                      <small class="text-muted">
+                        (durasi tidur aktual / total waktu di tempat tidur) × 100%
+                      </small>
+                    </td>
+
+                    <td colspan="4" class="text-center">
+
+                      <div class="mb-2">
+                        <strong id="hasilEfisiensi">-</strong>
+                      </div>
+
+                      <div id="kategoriEfisiensi" class="text-muted">
+                        Isi jam tidur, jam bangun, dan durasi tidur aktual
+                      </div>
+
+                      <!-- Nilai skor 0–3 yang dikirim ke Python -->
+                      <input type="hidden" name="p5_efisiensi" id="p5_efisiensi" required>
+
+                    </td>
+                  </tr>
+
+
+                  <!-- 9 -->
+                  <tr>
+                    <td class="text-center">9</td>
+
+                    <td>
+                      <strong>Gangguan tidur</strong><br>
+
+                      Seberapa sering Anda mengalami gangguan berikut
+                      dalam 1 bulan terakhir?
+
+                      <ol type="a" class="mb-0 mt-2">
+                        <li>Terbangun di tengah malam/dini hari</li>
+                        <li>Sering buang air kecil malam hari</li>
+                        <li>Merasa panas/kegerahan</li>
+                        <li>Mimpi buruk</li>
+                        <li>Nyeri/kram otot</li>
+                        <li>Sulit bernapas</li>
+                        <li>Gerakan janin mengganggu tidur</li>
+                      </ol>
+
+                      <small class="text-muted">
+                        0 = Tidak pernah,
+                        1 = &lt;1 kali/minggu,
+                        2 = 1–2 kali/minggu,
+                        3 = ≥3 kali/minggu
+                      </small>
+                    </td>
+
+                    <td colspan="4">
+
+                      <div class="mb-2">
+                        <strong>a.</strong> Terbangun di tengah malam/dini hari<br>
+                        <input type="radio" name="p5_gangguan_a" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_a" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_a" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_a" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div class="mb-2">
+                        <strong>b.</strong> Sering buang air kecil di malam hari<br>
+                        <input type="radio" name="p5_gangguan_b" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_b" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_b" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_b" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div class="mb-2">
+                        <strong>c.</strong> Merasa panas atau kegerahan<br>
+                        <input type="radio" name="p5_gangguan_c" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_c" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_c" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_c" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div class="mb-2">
+                        <strong>d.</strong> Mimpi buruk<br>
+                        <input type="radio" name="p5_gangguan_d" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_d" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_d" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_d" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div class="mb-2">
+                        <strong>e.</strong> Nyeri atau kram otot<br>
+                        <input type="radio" name="p5_gangguan_e" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_e" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_e" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_e" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div class="mb-2">
+                        <strong>f.</strong> Sulit bernapas<br>
+                        <input type="radio" name="p5_gangguan_f" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_f" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_f" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_f" value="3" class="ms-3"> 3
+                      </div>
+
+                      <div>
+                        <strong>g.</strong> Gerakan janin mengganggu tidur<br>
+                        <input type="radio" name="p5_gangguan_g" value="0" required> 0
+                        <input type="radio" name="p5_gangguan_g" value="1" class="ms-3"> 1
+                        <input type="radio" name="p5_gangguan_g" value="2" class="ms-3"> 2
+                        <input type="radio" name="p5_gangguan_g" value="3" class="ms-3"> 3
+                      </div>
+
+                    </td>
+                  </tr>
+
+
+                  <!-- 10 -->
+                  <tr>
+                    <td class="text-center">10</td>
+
+                    <td>
+                      Seberapa sering Anda menggunakan obat tidur
+                      atau suplemen (termasuk herbal) untuk membantu tidur
+                      dalam 1 bulan terakhir?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_obat_tidur" value="0" required>
+                      <br>Tidak pernah
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_obat_tidur" value="1">
+                      <br>&lt;1 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_obat_tidur" value="2">
+                      <br>1–2 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_obat_tidur" value="3">
+                      <br>≥3 kali/minggu
+                    </td>
+                  </tr>
+
+
+                  <!-- 11 -->
+                  <tr>
+                    <td class="text-center">11</td>
+
+                    <td>
+                      Seberapa sering Anda merasa mengantuk
+                      atau lelah di siang hari?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_1" value="0" required>
+                      <br>Tidak pernah
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_1" value="1">
+                      <br>&lt;1 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_1" value="2">
+                      <br>1–2 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_1" value="3">
+                      <br>≥3 kali/minggu
+                    </td>
+                  </tr>
+
+
+                  <!-- 12 -->
+                  <tr>
+                    <td class="text-center">12</td>
+
+                    <td>
+                      Seberapa sering Anda mengantuk saat beraktivitas
+                      (misalnya mengurus rumah, bekerja)?
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_2" value="0" required>
+                      <br>Tidak pernah
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_2" value="1">
+                      <br>&lt;1 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_2" value="2">
+                      <br>1–2 kali/minggu
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p5_siang_2" value="3">
+                      <br>≥3 kali/minggu
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pola Makan -->
+        <div class="col-12 mb-3">
+
+          <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#p6-collapse" aria-expanded="false" aria-controls="p6-collapse">
+            <strong>Pola Makan</strong>
+            <span>▼</span>
+          </button>
+
+          <div class="collapse mt-3" id="p6-collapse">
+
+            <div class="alert alert-info">
+              Pilih frekuensi konsumsi rata-rata dalam 1 minggu terakhir.
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle">
+
+                <thead class="table-light text-center">
+                  <tr>
+                    <th>No</th>
+                    <th>Jenis Makanan</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                  </tr>
+
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Tidak pernah</th>
+                    <th>1–2 kali/minggu</th>
+                    <th>3–4 kali/minggu</th>
+                    <th>5–6 kali/minggu</th>
+                    <th>Setiap hari</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!-- GARAM & MAKANAN ASIN -->
+                  <tr class="table-secondary">
+                    <th colspan="7">
+                      KONSUMSI GARAM & MAKANAN ASIN
+                    </th>
+                  </tr>
+
+                  <!-- 1 -->
+                  <tr>
+                    <td class="text-center">1</td>
+                    <td>Makanan instan (mie instan, sarden kaleng)</td>
+                    <td class="text-center"><input type="radio" name="p6_1" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_1" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_1" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_1" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_1" value="5"></td>
+                  </tr>
+
+                  <!-- 2 -->
+                  <tr>
+                    <td class="text-center">2</td>
+                    <td>Makanan olahan tinggi garam (sosis, nugget, kornet)</td>
+                    <td class="text-center"><input type="radio" name="p6_2" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_2" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_2" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_2" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_2" value="5"></td>
+                  </tr>
+
+                  <!-- 3 -->
+                  <tr>
+                    <td class="text-center">3</td>
+                    <td>Makanan ringan asin (keripik, ciki, snack asin)</td>
+                    <td class="text-center"><input type="radio" name="p6_3" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_3" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_3" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_3" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_3" value="5"></td>
+                  </tr>
+
+                  <!-- 4 -->
+                  <tr>
+                    <td class="text-center">4</td>
+                    <td>Garam dapur tambahan saat makan (bukan dari masakan)</td>
+                    <td class="text-center"><input type="radio" name="p6_4" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_4" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_4" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_4" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_4" value="5"></td>
+                  </tr>
+
+
+                  <!-- LEMAK JENUH -->
+                  <tr class="table-secondary">
+                    <th colspan="7">
+                      KONSUMSI LEMAK JENUH
+                    </th>
+                  </tr>
+
+                  <!-- 5 -->
+                  <tr>
+                    <td class="text-center">5</td>
+                    <td>Gorengan (pisang goreng, bakwan, dll.)</td>
+                    <td class="text-center"><input type="radio" name="p6_5" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_5" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_5" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_5" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_5" value="5"></td>
+                  </tr>
+
+                  <!-- 6 -->
+                  <tr>
+                    <td class="text-center">6</td>
+                    <td>Daging berlemak (daging sapi/kambing berlemak/gajih)</td>
+                    <td class="text-center"><input type="radio" name="p6_6" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_6" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_6" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_6" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_6" value="5"></td>
+                  </tr>
+
+                  <!-- 7 -->
+                  <tr>
+                    <td class="text-center">7</td>
+                    <td>Makanan cepat saji (burger, fried chicken, tempura, dll.)</td>
+                    <td class="text-center"><input type="radio" name="p6_7" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_7" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_7" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_7" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_7" value="5"></td>
+                  </tr>
+
+                  <!-- 8 -->
+                  <tr>
+                    <td class="text-center">8</td>
+                    <td>Makanan bersantan (gulai, rendang, opor, dll.)</td>
+                    <td class="text-center"><input type="radio" name="p6_8" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_8" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_8" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_8" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_8" value="5"></td>
+                  </tr>
+
+
+                  <!-- PROTEIN & SUSU -->
+                  <tr class="table-secondary">
+                    <th colspan="7">
+                      KONSUMSI PROTEIN & PRODUK SUSU
+                    </th>
+                  </tr>
+
+                  <!-- 9 -->
+                  <tr>
+                    <td class="text-center">9</td>
+                    <td>Telur ayam</td>
+                    <td class="text-center"><input type="radio" name="p6_9" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_9" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_9" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_9" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_9" value="5"></td>
+                  </tr>
+
+                  <!-- 10 -->
+                  <tr>
+                    <td class="text-center">10</td>
+                    <td>Susu ibu hamil/susu UHT/susu segar</td>
+                    <td class="text-center"><input type="radio" name="p6_10" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_10" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_10" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_10" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_10" value="5"></td>
+                  </tr>
+
+                  <!-- 11 -->
+                  <tr>
+                    <td class="text-center">11</td>
+                    <td>Ikan (ikan laut/tawar)</td>
+                    <td class="text-center"><input type="radio" name="p6_11" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_11" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_11" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_11" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_11" value="5"></td>
+                  </tr>
+
+                  <!-- 12 -->
+                  <tr>
+                    <td class="text-center">12</td>
+                    <td>Kacang-kacangan (kedelai, tempe, tahu, kacang tanah)</td>
+                    <td class="text-center"><input type="radio" name="p6_12" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_12" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_12" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_12" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_12" value="5"></td>
+                  </tr>
+
+
+                  <!-- SAYUR & BUAH -->
+                  <tr class="table-secondary">
+                    <th colspan="7">
+                      KONSUMSI SAYUR & BUAH (ANTIOKSIDAN)
+                    </th>
+                  </tr>
+
+                  <!-- 13 -->
+                  <tr>
+                    <td class="text-center">13</td>
+                    <td>Sayuran hijau (bayam, kangkung, sawi, brokoli)</td>
+                    <td class="text-center"><input type="radio" name="p6_13" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_13" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_13" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_13" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_13" value="5"></td>
+                  </tr>
+
+                  <!-- 14 -->
+                  <tr>
+                    <td class="text-center">14</td>
+                    <td>Buah segar (jeruk, pepaya, apel, pisang, dll.)</td>
+                    <td class="text-center"><input type="radio" name="p6_14" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_14" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_14" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_14" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_14" value="5"></td>
+                  </tr>
+
+                  <!-- 15 -->
+                  <tr>
+                    <td class="text-center">15</td>
+                    <td>Jus buah segar (tanpa gula tambahan)</td>
+                    <td class="text-center"><input type="radio" name="p6_15" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_15" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_15" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_15" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_15" value="5"></td>
+                  </tr>
+
+
+                  <!-- MINUMAN -->
+                  <tr class="table-secondary">
+                    <th colspan="7">
+                      KONSUMSI MINUMAN & CAIRAN LAINNYA
+                    </th>
+                  </tr>
+
+                  <!-- 16 -->
+                  <tr>
+                    <td class="text-center">16</td>
+                    <td>Minuman manis (teh manis, sirup, minuman kemasan)</td>
+                    <td class="text-center"><input type="radio" name="p6_16" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_16" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_16" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_16" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_16" value="5"></td>
+                  </tr>
+
+                  <!-- 17 -->
+                  <tr>
+                    <td class="text-center">17</td>
+                    <td>Minum air putih ≥ 8 gelas/hari</td>
+                    <td class="text-center"><input type="radio" name="p6_17" value="1" required></td>
+                    <td class="text-center"><input type="radio" name="p6_17" value="2"></td>
+                    <td class="text-center"><input type="radio" name="p6_17" value="3"></td>
+                    <td class="text-center"><input type="radio" name="p6_17" value="4"></td>
+                    <td class="text-center"><input type="radio" name="p6_17" value="5"></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Obesitas -->
+        <div class="col-12 mb-3">
+
+          <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#p7-collapse" aria-expanded="false" aria-controls="p7-collapse">
+            <strong>Obesitas</strong>
+
+            <span>▼</span>
+          </button>
+
+          <!-- Isi Obesitas -->
+          <div class="collapse mt-3" id="p7-collapse">
+
+            <!-- Berat Badan -->
+            <div class="mb-3">
+              <label for="p7_berat_badan" class="form-label">
+                Berat Badan sebelum kehamilan (kg)
+              </label>
+
+              <input type="number" class="form-control" id="p7_berat_badan" name="p7_berat_badan"
+                placeholder="Masukkan berat badan" min="1" step="0.1" required />
+            </div>
+
+            <!-- Tinggi Badan -->
+            <div class="mb-3">
+              <label for="p7_tinggi_badan" class="form-label">
+                Tinggi Badan (cm)
+              </label>
+
+              <input type="number" class="form-control" id="p7_tinggi_badan" name="p7_tinggi_badan"
+                placeholder="Masukkan tinggi badan" min="1" step="0.1" required />
+            </div>
+
+            <!-- IMT -->
+            <div class="mb-3">
+              <label for="p7_bmi" class="form-label">
+                IMT (kg/m²)
+              </label>
+              <input type="text" class="form-control" id="p7_bmi" name="p7_bmi" readonly />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stres -->
+        <div class="col-12 mb-3">
+
+          <button type="button" class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" data-bs-target="#p9-collapse" aria-expanded="false" aria-controls="p9-collapse">
+            <strong>Stres</strong>
+            <span>▼</span>
+          </button>
+
+          <div class="collapse mt-3" id="p9-collapse">
+
+            <div class="alert alert-info">
+              Bacalah setiap pernyataan dan pilih jawaban yang paling sesuai
+              dengan kondisi Anda selama seminggu terakhir, termasuk hari ini.
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle">
+
+                <thead class="table-light text-center">
+                  <tr>
+                    <th style="width: 60px;">No</th>
+                    <th>Pertanyaan</th>
+                    <th style="width: 60px;">0</th>
+                    <th style="width: 60px;">1</th>
+                    <th style="width: 60px;">2</th>
+                    <th style="width: 60px;">3</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!-- 1 -->
+                  <tr>
+                    <td class="text-center">1</td>
+
+                    <td>
+                      Saya merasa sulit untuk tenang setelah terjadi gangguan.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_1" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_1" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_1" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_1" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 2 -->
+                  <tr>
+                    <td class="text-center">2</td>
+
+                    <td>
+                      Saya cenderung bereaksi berlebihan terhadap situasi.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_2" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_2" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_2" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_2" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 3 -->
+                  <tr>
+                    <td class="text-center">3</td>
+
+                    <td>
+                      Saya merasa gelisah.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_3" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_3" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_3" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_3" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 4 -->
+                  <tr>
+                    <td class="text-center">4</td>
+
+                    <td>
+                      Saya merasa sulit untuk rileks.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_4" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_4" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_4" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_4" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 5 -->
+                  <tr>
+                    <td class="text-center">5</td>
+
+                    <td>
+                      Saya merasa mudah tersinggung.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_5" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_5" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_5" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_5" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 6 -->
+                  <tr>
+                    <td class="text-center">6</td>
+
+                    <td>
+                      Saya merasa sulit untuk sabar terhadap gangguan kecil.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_6" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_6" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_6" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_6" value="3">
+                    </td>
+                  </tr>
+
+                  <!-- 7 -->
+                  <tr>
+                    <td class="text-center">7</td>
+
+                    <td>
+                      Saya merasa tegang dan sangat waspada.
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_7" value="0" required>
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_7" value="1">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_7" value="2">
+                    </td>
+
+                    <td class="text-center">
+                      <input type="radio" name="p9_7" value="3">
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+
+            <!-- Keterangan skor -->
+            <div>
+              <small>
+                <strong>0</strong> = Tidak pernah &nbsp; | &nbsp;
+                <strong>1</strong> = Kadang-kadang &nbsp; | &nbsp;
+                <strong>2</strong> = Sering &nbsp; | &nbsp;
+                <strong>3</strong> = Sangat sering
+              </small>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Diabetes -->
+        <div class="col-12 mb-3">
+
+          <label for="p10" class="form-label">
+            Apakah Anda memiliki riwayat diagnosis Diabetes Melitus
+            sebelum kehamilan?
+          </label>
+
+          <select class="form-select" id="p10" name="p10" required>
+            <option value="" selected disabled>Pilih jawaban</option>
+            <option value="1">Ada</option>
+            <option value="0">Tidak ada</option>
+          </select>
+
+          <div class="form-text">
+            Berdasarkan riwayat diagnosis Diabetes Melitus sebelum kehamilan
+            berdasarkan anamnesis atau rekam medis.
+          </div>
+
+        </div>
+
+        <!-- Jarak Kehamilan -->
+        <div class="col-12 mb-3">
+
+          <label for="p11" class="form-label">
+            Berapa jarak waktu antara kehamilan terakhir dengan kehamilan saat ini?
+          </label>
+
+          <input type="number" class="form-control" id="p11" name="p11" min="0" step="0.1"
+            placeholder="Masukkan jarak kehamilan dalam tahun" required>
+
+          <div class="form-text">
+            Hitung berdasarkan interval waktu antara kelahiran/kehamilan sebelumnya
+            dengan kehamilan saat ini.
+          </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="button" class="btn btn-primary" id="btnKonfirmasi">
+            Simpan
+          </button>
+        </div>
     </form>
+    <!-- MODAL KONFIRMASI DATA -->
+    <div class="modal fade" id="modalKonfirmasi" tabindex="-1" aria-labelledby="modalKonfirmasiLabel"
+      aria-hidden="true">
+
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalKonfirmasiLabel">
+              Konfirmasi Data
+            </h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <div class="alert alert-info">
+              Silakan periksa kembali data yang telah Anda masukkan sebelum melanjutkan.
+            </div>
+
+            <table class="table table-bordered align-middle">
+
+              <tbody>
+
+                <!-- Nama -->
+                <tr>
+                  <th width="40%">Nama Lengkap</th>
+                  <td>
+                    <span id="confirm_nama"></span>
+                  </td>
+                </tr>
+
+                <!-- P1 -->
+                <tr>
+                  <th width="40%">Usia</th>
+                  <td>
+                    <span id="confirm_p1"></span> tahun
+                  </td>
+                </tr>
+
+                <!-- P2 -->
+                <tr>
+                  <th>Paritas</th>
+                  <td>
+                    <span id="confirm_p2"></span>
+                  </td>
+                </tr>
+
+                <!-- P3 -->
+                <tr>
+                  <th>Riwayat Hipertensi</th>
+                  <td>
+                    <span id="confirm_p3"></span>
+                  </td>
+                </tr>
+
+                <!-- P4 -->
+                <tr>
+                  <th>Riwayat Preeklampsia Keluarga</th>
+                  <td>
+                    <span id="confirm_p4"></span>
+                  </td>
+                </tr>
+
+                <!-- P5 -->
+                <tr>
+                  <th>Pola Istirahat</th>
+                  <td>
+
+                    <div>
+                      Kualitas tidur:
+                      <strong id="confirm_p5_kualitas"></strong>
+                    </div>
+
+                    <div>
+                      Latensi tidur:
+                      <strong id="confirm_p5_latensi"></strong>
+                    </div>
+
+                    <div>
+                      Kesulitan tidur:
+                      <strong id="confirm_p5_kesulitan"></strong>
+                    </div>
+
+                    <div>
+                      Durasi tidur:
+                      <strong id="confirm_p5_durasi"></strong>
+                    </div>
+
+                    <div>
+                      Jam mulai tidur:
+                      <strong id="confirm_p5_jam_tidur"></strong>
+                    </div>
+
+                    <div>
+                      Jam bangun:
+                      <strong id="confirm_p5_jam_bangun"></strong>
+                    </div>
+
+                    <div>
+                      Durasi tidur aktual:
+                      <strong id="confirm_p5_tidur_nyenyak"></strong>
+                    </div>
+
+                    <div>
+                      Efisiensi tidur:
+                      <strong id="confirm_p5_efisiensi"></strong>
+                    </div>
+
+                    <div>
+                      Skor gangguan tidur:
+                      <strong id="confirm_p5_gangguan"></strong>
+                    </div>
+
+                    <div>
+                      Penggunaan obat tidur:
+                      <strong id="confirm_p5_obat"></strong>
+                    </div>
+
+                    <div>
+                      Fungsi siang hari:
+                      <strong id="confirm_p5_siang"></strong>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                      <strong>Total skor:
+                        <span id="confirm_p5_total"></span>
+                      </strong>
+                    </div>
+
+                    <div>
+                      Kategori:
+                      <strong id="confirm_p5_kategori"></strong>
+                    </div>
+
+                  </td>
+                </tr>
+
+                <!-- P6 -->
+                <tr>
+                  <th>Pola Makan</th>
+                  <td>
+                    <div id="confirm_p6_detail"></div>
+
+                    <div class="mt-2">
+                      <strong>Total skor pola makan: <span id="confirm_p6_total"></span></strong>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- P7 -->
+                <tr>
+                  <th>Obesitas</th>
+                  <td>
+                    <div>
+                      <strong>Berat badan:</strong>
+                      <span id="confirm_p7_berat"></span> kg
+                    </div>
+
+                    <div>
+                      <strong>Tinggi badan:</strong>
+                      <span id="confirm_p7_tinggi"></span> cm
+                    </div>
+
+                    <div>
+                      <strong>IMT:</strong>
+                      <span id="confirm_p7_bmi"></span> kg/m²
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- P9 -->
+                <tr>
+                  <th>Stres</th>
+                  <td>
+                    <div id="confirm_p9_detail"></div>
+                    <div class="mt-2">
+                      <strong>Total skor stres: <span id="confirm_p9_total"></span></strong>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- P10 -->
+                <tr>
+                  <th>Diabetes Melitus</th>
+                  <td>
+                    <span id="confirm_p10"></span>
+                  </td>
+                </tr>
+
+                <!-- P11 -->
+                <tr>
+                  <th>Jarak Kehamilan</th>
+                  <td>
+                    <span id="confirm_p11"></span> tahun
+                  </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+            <div class="alert alert-warning mb-0">
+              Apakah data yang Anda masukkan sudah benar?
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Periksa Kembali
+            </button>
+
+            <button type="button" class="btn btn-primary" id="btnLanjutkan">
+              Ya, Data Sudah Benar
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 <!-- /Faq Section -->
 
 {% endblock content %}
+
+{% block script %}
+<script>
+  const beratBadan = document.getElementById("p7_berat_badan");
+  const tinggiBadan = document.getElementById("p7_tinggi_badan");
+  const bmi = document.getElementById("p7_bmi");
+
+  function hitungBMI() {
+    const berat = parseFloat(beratBadan.value);
+    const tinggi = parseFloat(tinggiBadan.value);
+
+    if (berat > 0 && tinggi > 0) {
+      const tinggiMeter = tinggi / 100;
+      const hasil = berat / (tinggiMeter * tinggiMeter);
+
+      bmi.value = hasil.toFixed(2);
+    } else {
+      bmi.value = "";
+    }
+  }
+
+  beratBadan.addEventListener("input", hitungBMI);
+  tinggiBadan.addEventListener("input", hitungBMI);
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const jamTidur = document.querySelector('[name="p5_jam_tidur"]');
+    const jamBangun = document.querySelector('[name="p5_jam_bangun"]');
+    const durasiTidur = document.querySelector('[name="p5_tidur_nyenyak"]');
+
+    const hasilEfisiensi = document.getElementById('hasilEfisiensi');
+    const kategoriEfisiensi = document.getElementById('kategoriEfisiensi');
+    const inputEfisiensi = document.getElementById('p5_efisiensi');
+
+
+    function hitungEfisiensi() {
+
+      if (!jamTidur.value || !jamBangun.value || !durasiTidur.value) {
+
+        hasilEfisiensi.textContent = '-';
+
+        kategoriEfisiensi.textContent =
+          'Isi jam tidur, jam bangun, dan durasi tidur aktual';
+
+        inputEfisiensi.value = '';
+
+        return;
+      }
+
+
+      // ============================
+      // Ambil jam tidur dan bangun
+      // ============================
+
+      const [jamT, menitT] = jamTidur.value.split(':').map(Number);
+      const [jamB, menitB] = jamBangun.value.split(':').map(Number);
+
+
+      let waktuTidur = (jamT * 60) + menitT;
+      let waktuBangun = (jamB * 60) + menitB;
+
+
+      // Jika bangun setelah tengah malam
+      if (waktuBangun <= waktuTidur) {
+        waktuBangun += 24 * 60;
+      }
+
+
+      // ============================
+      // Total waktu di tempat tidur
+      // ============================
+
+      const totalMenit =
+        waktuBangun - waktuTidur;
+
+      const totalJam =
+        totalMenit / 60;
+
+
+      // ============================
+      // Durasi tidur aktual
+      // ============================
+
+      const durasiAktual =
+        parseFloat(durasiTidur.value);
+
+
+      if (durasiAktual <= 0 || totalJam <= 0) {
+
+        hasilEfisiensi.textContent = '-';
+
+        kategoriEfisiensi.textContent =
+          'Durasi tidur harus lebih dari 0';
+
+        inputEfisiensi.value = '';
+
+        return;
+      }
+
+
+      // ============================
+      // Hitung efisiensi
+      // ============================
+
+      const efisiensi =
+        (durasiAktual / totalJam) * 100;
+
+
+      // ============================
+      // Tentukan skor
+      // ============================
+
+      let skor;
+      let kategori;
+
+
+      if (efisiensi >= 85) {
+
+        skor = 0;
+        kategori = '≥85%';
+
+      } else if (efisiensi >= 75) {
+
+        skor = 1;
+        kategori = '75–84%';
+
+      } else if (efisiensi >= 65) {
+
+        skor = 2;
+        kategori = '65–74%';
+
+      } else {
+
+        skor = 3;
+        kategori = '<65%';
+      }
+
+
+      // ============================
+      // Tampilkan hasil
+      // ============================
+
+      hasilEfisiensi.textContent =
+        efisiensi.toFixed(2) + '%';
+
+      kategoriEfisiensi.textContent =
+        kategori;
+
+      // Kirim skor 0–3 ke Python
+      inputEfisiensi.value = skor;
+    }
+
+
+    // Jalankan setiap kali input berubah
+
+    jamTidur.addEventListener('change', hitungEfisiensi);
+    jamBangun.addEventListener('change', hitungEfisiensi);
+    durasiTidur.addEventListener('input', hitungEfisiensi);
+
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    const form = document.querySelector('form');
+    const btnKonfirmasi = document.getElementById('btnKonfirmasi');
+    const btnLanjutkan = document.getElementById('btnLanjutkan');
+    const modalElement = document.getElementById('modalKonfirmasi');
+
+    const modalKonfirmasi = new bootstrap.Modal(modalElement);
+
+
+    // =====================================================
+    // TOMBOL KONFIRMASI
+    // =====================================================
+
+    btnKonfirmasi.addEventListener('click', function () {
+
+      // =================================================
+      // NAMA
+      // =================================================
+
+      const nama = document.getElementById('nama').value.trim();
+
+
+      // =================================================
+      // P1 - P4
+      // =================================================
+
+      const p1 = document.getElementById('p1').value;
+      const p2 = document.getElementById('p2').value;
+      const p3 = document.getElementById('p3').value;
+      const p4 = document.getElementById('p4').value;
+
+
+      // =================================================
+      // P5 - POLA ISTIRAHAT
+      // =================================================
+
+      const p5Kualitas = document.querySelector(
+        'input[name="p5_kualitas"]:checked'
+      );
+
+      const p5Latensi = document.querySelector(
+        'input[name="p5_latensi"]:checked'
+      );
+
+      const p5Kesulitan = document.querySelector(
+        'input[name="p5_kesulitan_tidur"]:checked'
+      );
+
+      const p5Durasi = document.querySelector(
+        'input[name="p5_durasi"]:checked'
+      );
+
+      const p5Obat = document.querySelector(
+        'input[name="p5_obat_tidur"]:checked'
+      );
+
+
+      // Jam tidur, jam bangun, tidur aktual
+      const jamTidur = document.querySelector(
+        'input[name="p5_jam_tidur"]'
+      ).value;
+
+      const jamBangun = document.querySelector(
+        'input[name="p5_jam_bangun"]'
+      ).value;
+
+      const tidurNyenyak = document.querySelector(
+        'input[name="p5_tidur_nyenyak"]'
+      ).value;
+
+
+      // Efisiensi tidur
+      const p5Efisiensi = document.getElementById(
+        'p5_efisiensi'
+      ).value;
+
+
+      // =================================================
+      // VALIDASI P5
+      // =================================================
+
+      if (
+        !p5Kualitas ||
+        !p5Latensi ||
+        !p5Kesulitan ||
+        !p5Durasi ||
+        !p5Obat ||
+        !jamTidur ||
+        !jamBangun ||
+        !tidurNyenyak
+      ) {
+
+        form.reportValidity();
+        return;
+      }
+
+
+      // Efisiensi harus sudah dihitung
+      if (!p5Efisiensi) {
+
+        alert(
+          'Silakan isi jam tidur, jam bangun, dan durasi tidur aktual terlebih dahulu agar efisiensi tidur dapat dihitung.'
+        );
+
+        return;
+      }
+
+
+      // =================================================
+      // P5 - GANGGUAN TIDUR
+      // =================================================
+
+      const p5Gangguan = [];
+
+      const daftarGangguan = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g'
+      ];
+
+      for (const item of daftarGangguan) {
+
+        const selected = document.querySelector(
+          `input[name="p5_gangguan_${item}"]:checked`
+        );
+
+        if (!selected) {
+
+          form.reportValidity();
+          return;
+        }
+
+        p5Gangguan.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // P5 - FUNGSI SIANG
+      // =================================================
+
+      const p5Siang = [];
+
+      for (let i = 1; i <= 2; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p5_siang_${i}"]:checked`
+        );
+
+        if (!selected) {
+
+          form.reportValidity();
+          return;
+        }
+
+        p5Siang.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // HITUNG SKOR P5
+      // =================================================
+
+      const skorGangguan =
+        p5Gangguan.reduce(
+          (total, nilai) => total + nilai,
+          0
+        ) / 7;
+
+
+      const skorSiang =
+        p5Siang.reduce(
+          (total, nilai) => total + nilai,
+          0
+        ) / 2;
+
+
+      const skorP5 =
+        parseInt(p5Kualitas.value) +
+        parseInt(p5Latensi.value) +
+        parseInt(p5Kesulitan.value) +
+        parseInt(p5Durasi.value) +
+        parseInt(p5Efisiensi) +
+        skorGangguan +
+        parseInt(p5Obat.value) +
+        skorSiang;
+
+
+      const kategoriP5 =
+        skorP5 > 5
+          ? 'Kualitas istirahat buruk'
+          : 'Kualitas istirahat baik';
+
+
+      // =================================================
+      // P6 - POLA MAKAN
+      // =================================================
+
+      const p6 = [];
+
+      for (let i = 1; i <= 17; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p6_${i}"]:checked`
+        );
+
+        if (!selected) {
+
+          form.reportValidity();
+          return;
+        }
+
+        p6.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      const totalP6 =
+        p6.reduce(
+          (total, nilai) => total + nilai,
+          0
+        );
+
+
+      // =================================================
+      // P7 - OBESITAS
+      // =================================================
+
+      const p7Berat =
+        document.getElementById('p7_berat_badan').value;
+
+      const p7Tinggi =
+        document.getElementById('p7_tinggi_badan').value;
+
+      const p7Bmi =
+        document.getElementById('p7_bmi').value;
+
+
+      if (!p7Berat || !p7Tinggi || !p7Bmi) {
+
+        form.reportValidity();
+        return;
+      }
+
+
+      // =================================================
+      // P9 - STRES
+      // =================================================
+
+      const p9 = [];
+
+      for (let i = 1; i <= 7; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p9_${i}"]:checked`
+        );
+
+        if (!selected) {
+
+          form.reportValidity();
+          return;
+        }
+
+        p9.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      const totalP9 =
+        p9.reduce(
+          (total, nilai) => total + nilai,
+          0
+        );
+
+
+      // =================================================
+      // P10 - P11
+      // =================================================
+
+      const p10 =
+        document.getElementById('p10').value;
+
+      const p11 =
+        document.getElementById('p11').value;
+
+
+      // =================================================
+      // VALIDASI DATA UTAMA
+      // =================================================
+
+      if (
+        !nama ||
+        !p1 ||
+        !p2 ||
+        !p3 ||
+        !p4 ||
+        !p10 ||
+        !p11
+      ) {
+
+        form.reportValidity();
+        return;
+      }
+
+
+      // =================================================
+      // TAMPILKAN NAMA
+      // =================================================
+
+      document.getElementById(
+        'confirm_nama'
+      ).textContent = nama;
+
+
+      // =================================================
+      // P1
+      // =================================================
+
+      document.getElementById(
+        'confirm_p1'
+      ).textContent = p1;
+
+
+      // =================================================
+      // P2
+      // =================================================
+
+      document.getElementById(
+        'confirm_p2'
+      ).textContent =
+        p2 === '1'
+          ? 'Ya, kehamilan pertama'
+          : 'Tidak, sudah pernah hamil sebelumnya';
+
+
+      // =================================================
+      // P3
+      // =================================================
+
+      document.getElementById(
+        'confirm_p3'
+      ).textContent =
+        p3 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
+
+
+      // =================================================
+      // P4
+      // =================================================
+
+      document.getElementById(
+        'confirm_p4'
+      ).textContent =
+        p4 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
+
+
+      // =================================================
+      // P5 - POLA ISTIRAHAT
+      // =================================================
+
+      document.getElementById(
+        'confirm_p5_kualitas'
+      ).textContent =
+        p5Kualitas.value;
+
+
+      document.getElementById(
+        'confirm_p5_latensi'
+      ).textContent =
+        p5Latensi.value;
+
+
+      document.getElementById(
+        'confirm_p5_kesulitan'
+      ).textContent =
+        p5Kesulitan.value;
+
+
+      document.getElementById(
+        'confirm_p5_durasi'
+      ).textContent =
+        p5Durasi.value;
+
+
+      document.getElementById(
+        'confirm_p5_jam_tidur'
+      ).textContent =
+        jamTidur;
+
+
+      document.getElementById(
+        'confirm_p5_jam_bangun'
+      ).textContent =
+        jamBangun;
+
+
+      document.getElementById(
+        'confirm_p5_tidur_nyenyak'
+      ).textContent =
+        tidurNyenyak + ' jam';
+
+
+      document.getElementById(
+        'confirm_p5_efisiensi'
+      ).textContent =
+        p5Efisiensi;
+
+
+      document.getElementById(
+        'confirm_p5_gangguan'
+      ).textContent =
+        skorGangguan.toFixed(2);
+
+
+      document.getElementById(
+        'confirm_p5_obat'
+      ).textContent =
+        p5Obat.value;
+
+
+      document.getElementById(
+        'confirm_p5_siang'
+      ).textContent =
+        skorSiang.toFixed(2);
+
+
+      document.getElementById(
+        'confirm_p5_total'
+      ).textContent =
+        skorP5.toFixed(2);
+
+
+      document.getElementById(
+        'confirm_p5_kategori'
+      ).textContent =
+        kategoriP5;
+
+
+      // =================================================
+      // P6 - POLA MAKAN
+      // =================================================
+
+      const detailP6 =
+        document.getElementById(
+          'confirm_p6_detail'
+        );
+
+      let htmlP6 = '';
+
+      p6.forEach((nilai, index) => {
+
+        htmlP6 += `
+                <div>
+                    Item ${index + 1}:
+                    <strong>${nilai}</strong>
+                </div>
+            `;
+
+      });
+
+      detailP6.innerHTML = htmlP6;
+
+
+      document.getElementById(
+        'confirm_p6_total'
+      ).textContent =
+        totalP6;
+
+
+      // =================================================
+      // P7 - OBESITAS
+      // =================================================
+
+      document.getElementById(
+        'confirm_p7_berat'
+      ).textContent =
+        p7Berat + ' kg';
+
+
+      document.getElementById(
+        'confirm_p7_tinggi'
+      ).textContent =
+        p7Tinggi + ' cm';
+
+
+      document.getElementById(
+        'confirm_p7_bmi'
+      ).textContent =
+        p7Bmi;
+
+
+      // =================================================
+      // P9 - STRES
+      // =================================================
+
+      const detailP9 =
+        document.getElementById(
+          'confirm_p9_detail'
+        );
+
+      let htmlP9 = '';
+
+      p9.forEach((nilai, index) => {
+
+        htmlP9 += `
+                <div>
+                    Item ${index + 1}:
+                    <strong>${nilai}</strong>
+                </div>
+            `;
+
+      });
+
+      detailP9.innerHTML = htmlP9;
+
+
+      document.getElementById(
+        'confirm_p9_total'
+      ).textContent =
+        totalP9;
+
+
+      // =================================================
+      // P10
+      // =================================================
+
+      document.getElementById(
+        'confirm_p10'
+      ).textContent =
+        p10 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
+
+
+      // =================================================
+      // P11
+      // =================================================
+
+      document.getElementById(
+        'confirm_p11'
+      ).textContent =
+        p11 + ' tahun';
+
+
+      // =================================================
+      // TAMPILKAN MODAL
+      // =================================================
+
+      modalKonfirmasi.show();
+
+    });
+
+
+    // =====================================================
+    // DATA SUDAH BENAR
+    // =====================================================
+
+    btnLanjutkan.addEventListener('click', function () {
+
+      form.submit();
+
+    });
+
+  });
+</script>
+{% endblock script %}
