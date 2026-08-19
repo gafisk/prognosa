@@ -1,5 +1,5 @@
 import re
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import joblib
 import numpy as np
 import pandas as pd
@@ -113,6 +113,37 @@ def prediksi():
 
     return render_template("prediksi.html", hasil_prediksi=hasil_prediksi)
 
+@app.route('/api/prediksi', methods=['GET'])
+def api_prediksi():
+
+    connection = get_connection()
+
+    try:
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT *
+            FROM prediksi
+            ORDER BY id DESC
+        """)
+
+        data = cursor.fetchall()
+
+        return jsonify({
+            "status": True,
+            "data": data
+        })
+
+    except Exception as e:
+
+        return jsonify({
+            "status": False,
+            "message": str(e)
+        }), 500
+
+    finally:
+        cursor.close()
+        connection.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
