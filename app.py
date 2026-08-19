@@ -15,6 +15,7 @@ def index():
 
 @app.route('/prediksi', methods=['GET', 'POST'])
 def prediksi():
+    hasil_prediksi = None
     if request.method == 'POST':
         # Nama
         nama = request.form.get('nama')
@@ -43,7 +44,16 @@ def prediksi():
         p8 = 0
         p12 = 0
         p13 = 0
-        prediksi = 0
+        prediksi = 1
+
+        # =========================
+        # PREDIKSI SEMENTARA
+        # =========================
+
+        if prediksi == 1:
+            hasil_prediksi = "Prediksi Benar"
+        else:
+            hasil_prediksi = "Prediksi Tidak Benar"
         
         # =========================
         # SIMPAN KE DATABASE
@@ -101,7 +111,7 @@ def prediksi():
         print("Prediksi:", prediksi)
         
 
-    return render_template("prediksi.html")
+    return render_template("prediksi.html", hasil_prediksi=hasil_prediksi)
 
 
 if __name__ == "__main__":
