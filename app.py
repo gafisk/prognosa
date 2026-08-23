@@ -39,10 +39,11 @@ def prediksi():
         p10 = int(request.form.get('p10'))
         # p11
         p11 = hitung_p11(request.form)
+        # p12
+        p12 = int(request.form.get('p12'))
         
         # Belum ada
         p8 = 0
-        p12 = 0
         p13 = 0
         prediksi = 1
 
@@ -106,7 +107,7 @@ def prediksi():
         print("Stres:", p9)
         print("Diabetes:", p10)
         print("Jarak Kehamilan:", p11)
-        print("Gemelli:", p12 , "masih belum")
+        print("Gemelli:", p12)
         print("Alkohol:", p13 , "masih belum")
         print("Prediksi:", prediksi)
         
