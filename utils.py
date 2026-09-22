@@ -1,6 +1,14 @@
 from datetime import datetime
 
 
+def hitung_p1(data):
+    usia = int(data.get('p1'))
+    if usia < 20 or usia > 35:
+        p1 = 1
+    else:
+        p1 = 0
+    return p1
+
 def hitung_p5(data):
 
     # ==========================================

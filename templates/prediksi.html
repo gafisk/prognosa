@@ -107,6 +107,19 @@
           </select>
         </div>
 
+        <!-- Alkohol -->
+        <div class="col-12 mb-3">
+          <label for="p13" class="form-label">
+            Apakah ibu mengonsumsi alkohol?
+          </label>
+
+          <select class="form-select" id="p13" name="p13" required>
+            <option value="" selected disabled>Pilih jawaban</option>
+            <option value="1">Ya, mengonsumsi alkohol</option>
+            <option value="0">Tidak, tidak mengonsumsi alkohol</option>
+          </select>
+        </div>
+
         <!-- Pola Istirahat -->
         <div class="col-12 mb-3">
 
@@ -1292,6 +1305,14 @@
                   </td>
                 </tr>
 
+                <!-- P13 -->
+                <tr>
+                  <th>Mengkonsumsi Alkohol</th>
+                  <td>
+                    <span id="confirm_p13"></span>
+                  </td>
+                </tr>
+
               </tbody>
 
             </table>
@@ -1568,13 +1589,14 @@
       const p10 = document.getElementById('p10').value;
       const p11 = document.getElementById('p11').value;
       const p12 = document.getElementById('p12').value;
+      const p13 = document.getElementById('p13').value;
 
 
       // =================================================
       // VALIDASI DATA UTAMA
       // =================================================
 
-      if (!nama || !p1 || !p2 || !p3 || !p4 || !p10 || !p11 || !p12) {
+      if (!nama || !p1 || !p2 || !p3 || !p4 || !p10 || !p11 || !p12 || !p13) {
         form.reportValidity();
         return;
       }
@@ -2198,6 +2220,17 @@
         'confirm_p12'
       ).textContent =
         p12 === '1'
+          ? 'Ya'
+          : 'Tidak';
+
+      // =================================================
+      // P13
+      // =================================================
+
+      document.getElementById(
+        'confirm_p13'
+      ).textContent =
+        p13 === '1'
           ? 'Ya'
           : 'Tidak';
 
