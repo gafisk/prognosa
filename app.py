@@ -45,16 +45,16 @@ def prediksi():
         # Belum ada
         p8 = 0
         p13 = 0
-        prediksi = 1
+        prediksi = 0
 
         # =========================
         # PREDIKSI SEMENTARA
         # =========================
 
         if prediksi == 1:
-            hasil_prediksi = "Prediksi Benar"
+            hasil_prediksi = "Risiko Tinggi"
         else:
-            hasil_prediksi = "Prediksi Tidak Benar"
+            hasil_prediksi = "Risiko Rendah"
         
         # =========================
         # SIMPAN KE DATABASE

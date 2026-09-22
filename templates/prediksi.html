@@ -1320,62 +1320,53 @@
     </div>
 
     <!-- MODAL PREDIKSI -->
-    <div class="modal fade"
-        id="modalHasilPrediksi"
-        tabindex="-1"
-        aria-labelledby="modalHasilPrediksiLabel">
+    <div class="modal fade" id="modalHasilPrediksi" tabindex="-1" aria-labelledby="modalHasilPrediksiLabel">
 
-        <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered">
 
-            <div class="modal-content">
+        <div class="modal-content">
 
-                <div class="modal-header">
+          <div class="modal-header">
 
-                    <h5 class="modal-title"
-                        id="modalHasilPrediksiLabel">
-                        Hasil Prediksi
-                    </h5>
+            <h5 class="modal-title" id="modalHasilPrediksiLabel">
+              Hasil Prediksi
+            </h5>
 
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close">
-                    </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </button>
 
-                </div>
+          </div>
 
-                <div class="modal-body text-center">
+          <div class="modal-body text-center">
 
-                    <div class="mb-3">
-                        <i class="bi bi-check-circle-fill"
-                          style="font-size: 60px;">
-                        </i>
-                    </div>
-
-                    <h3 class="mb-3">
-                        {{ hasil_prediksi }}
-                    </h3>
-
-                    <p class="text-muted mb-0">
-                        Data berhasil diproses dan disimpan.
-                    </p>
-
-                </div>
-
-                <div class="modal-footer justify-content-center">
-
-                    <button type="button"
-                            class="btn btn-primary"
-                            id="btnTutupHasilPrediksi"
-                            data-bs-dismiss="modal">
-                        Tutup
-                    </button>
-
-                </div>
-
+            <div class="mb-3">
+              <i class="bi bi-check-circle-fill" style="font-size: 60px; color: {% if hasil_prediksi == 'Risiko Tinggi' %}red{% elif hasil_prediksi == 'Risiko Rendah' %}green{% endif %};"> </i>
             </div>
 
+            <h3 class="mb-3">
+              {{ hasil_prediksi }}
+            </h3>
+
+            <p class="text-muted mb-0"> {% if hasil_prediksi == "Risiko Tinggi" %} Hasil skrining menunjukkan risiko
+              tinggi preeklampsia.<br> Hasil ini bukan diagnosis. Segera konsultasikan hasil skrining kepada bidan atau
+              dokter untuk pemeriksaan dan tindak lanjut lebih lanjut. {% elif hasil_prediksi == "Risiko Rendah" %}
+              Hasil skrining menunjukkan risiko rendah preeklampsia.<br> Tetap lakukan pemeriksaan kehamilan secara
+              rutin dan ikuti anjuran tenaga kesehatan. Jika terdapat keluhan atau tanda bahaya kehamilan, segera
+              hubungi bidan atau tenaga kesehatan. {% else %} Data berhasil diproses dan disimpan. {% endif %} </p>
+
+          </div>
+
+          <div class="modal-footer justify-content-center">
+
+            <button type="button" class="btn btn-primary" id="btnTutupHasilPrediksi" data-bs-dismiss="modal">
+              Tutup
+            </button>
+
+          </div>
+
         </div>
+
+      </div>
 
     </div>
   </div>
@@ -1548,7 +1539,7 @@
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
 
     const form = document.querySelector('form');
     const btnKonfirmasi = document.getElementById('btnKonfirmasi');
@@ -1564,516 +1555,516 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnKonfirmasi.addEventListener('click', function () {
 
-        // =================================================
-        // DATA UTAMA
-        // =================================================
+      // =================================================
+      // DATA UTAMA
+      // =================================================
 
-        const nama = document.getElementById('nama').value.trim();
+      const nama = document.getElementById('nama').value.trim();
 
-        const p1 = document.getElementById('p1').value;
-        const p2 = document.getElementById('p2').value;
-        const p3 = document.getElementById('p3').value;
-        const p4 = document.getElementById('p4').value;
-        const p10 = document.getElementById('p10').value;
-        const p11 = document.getElementById('p11').value;
-        const p12 = document.getElementById('p12').value;
-
-
-        // =================================================
-        // VALIDASI DATA UTAMA
-        // =================================================
-
-        if (!nama || !p1 || !p2 || !p3 || !p4 || !p10 || !p11 || !p12) {
-            form.reportValidity();
-            return;
-        }
+      const p1 = document.getElementById('p1').value;
+      const p2 = document.getElementById('p2').value;
+      const p3 = document.getElementById('p3').value;
+      const p4 = document.getElementById('p4').value;
+      const p10 = document.getElementById('p10').value;
+      const p11 = document.getElementById('p11').value;
+      const p12 = document.getElementById('p12').value;
 
 
-        // =================================================
-        // P5 - POLA ISTIRAHAT
-        // =================================================
+      // =================================================
+      // VALIDASI DATA UTAMA
+      // =================================================
 
-        const p5Kualitas = document.querySelector(
-            'input[name="p5_kualitas"]:checked'
+      if (!nama || !p1 || !p2 || !p3 || !p4 || !p10 || !p11 || !p12) {
+        form.reportValidity();
+        return;
+      }
+
+
+      // =================================================
+      // P5 - POLA ISTIRAHAT
+      // =================================================
+
+      const p5Kualitas = document.querySelector(
+        'input[name="p5_kualitas"]:checked'
+      );
+
+      const p5Latensi = document.querySelector(
+        'input[name="p5_latensi"]:checked'
+      );
+
+      const p5Kesulitan = document.querySelector(
+        'input[name="p5_kesulitan_tidur"]:checked'
+      );
+
+      const p5Durasi = document.querySelector(
+        'input[name="p5_durasi"]:checked'
+      );
+
+      const p5Obat = document.querySelector(
+        'input[name="p5_obat_tidur"]:checked'
+      );
+
+
+      const jamTidur =
+        document.querySelector(
+          'input[name="p5_jam_tidur"]'
+        ).value;
+
+      const jamBangun =
+        document.querySelector(
+          'input[name="p5_jam_bangun"]'
+        ).value;
+
+      const tidurNyenyak =
+        document.querySelector(
+          'input[name="p5_tidur_nyenyak"]'
+        ).value;
+
+
+      const p5Efisiensi =
+        document.getElementById('p5_efisiensi').value;
+
+
+      // =================================================
+      // VALIDASI P5
+      // =================================================
+
+      if (
+        !p5Kualitas ||
+        !p5Latensi ||
+        !p5Kesulitan ||
+        !p5Durasi ||
+        !p5Obat ||
+        !jamTidur ||
+        !jamBangun ||
+        !tidurNyenyak
+      ) {
+        form.reportValidity();
+        return;
+      }
+
+
+      if (!p5Efisiensi) {
+        alert(
+          'Silakan isi jam tidur, jam bangun, dan durasi tidur aktual terlebih dahulu agar efisiensi tidur dapat dihitung.'
+        );
+        return;
+      }
+
+
+      // =================================================
+      // P5 - GANGGUAN TIDUR
+      // =================================================
+
+      const p5Gangguan = [];
+
+      const daftarGangguan = [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g'
+      ];
+
+      for (const item of daftarGangguan) {
+
+        const selected = document.querySelector(
+          `input[name="p5_gangguan_${item}"]:checked`
         );
 
-        const p5Latensi = document.querySelector(
-            'input[name="p5_latensi"]:checked'
+        if (!selected) {
+          form.reportValidity();
+          return;
+        }
+
+        p5Gangguan.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // P5 - FUNGSI SIANG
+      // =================================================
+
+      const p5Siang = [];
+
+      for (let i = 1; i <= 2; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p5_siang_${i}"]:checked`
         );
 
-        const p5Kesulitan = document.querySelector(
-            'input[name="p5_kesulitan_tidur"]:checked'
+        if (!selected) {
+          form.reportValidity();
+          return;
+        }
+
+        p5Siang.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // HITUNG P5
+      // HARUS SAMA DENGAN PYTHON
+      // =================================================
+
+      const skorKualitas =
+        parseInt(p5Kualitas.value);
+
+      const skorLatensi =
+        (
+          parseInt(p5Latensi.value) +
+          parseInt(p5Kesulitan.value)
+        ) / 2;
+
+      const skorDurasi =
+        parseInt(p5Durasi.value);
+
+      const skorEfisiensi =
+        parseInt(p5Efisiensi);
+
+      const skorGangguan =
+        p5Gangguan.reduce(
+          (total, nilai) => total + nilai,
+          0
+        ) / 7;
+
+      const skorObat =
+        parseInt(p5Obat.value);
+
+      const skorSiang =
+        p5Siang.reduce(
+          (total, nilai) => total + nilai,
+          0
+        ) / 2;
+
+
+      const skorP5 =
+        skorKualitas +
+        skorLatensi +
+        skorDurasi +
+        skorEfisiensi +
+        skorGangguan +
+        skorObat +
+        skorSiang;
+
+
+      const kategoriP5 =
+        skorP5 > 5
+          ? 'Kualitas istirahat buruk'
+          : 'Kualitas istirahat baik';
+
+
+      // =================================================
+      // P6 - POLA MAKAN
+      // HARUS SAMA DENGAN PYTHON
+      // =================================================
+
+      const p6 = [];
+
+      for (let i = 1; i <= 17; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p6_${i}"]:checked`
         );
 
-        const p5Durasi = document.querySelector(
-            'input[name="p5_durasi"]:checked'
+        if (!selected) {
+          form.reportValidity();
+          return;
+        }
+
+        p6.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // P6 RISIKO
+      //
+      // p6_1 sampai p6_8
+      // + p6_16
+      // =================================================
+
+      const skorRisiko =
+        p6[0] +
+        p6[1] +
+        p6[2] +
+        p6[3] +
+        p6[4] +
+        p6[5] +
+        p6[6] +
+        p6[7] +
+        p6[15];
+
+
+      // =================================================
+      // P6 PROTEKTIF
+      //
+      // p6_9 sampai p6_15
+      // + p6_17
+      // =================================================
+
+      const skorProtektif =
+        p6[8] +
+        p6[9] +
+        p6[10] +
+        p6[11] +
+        p6[12] +
+        p6[13] +
+        p6[14] +
+        p6[16];
+
+
+      // =================================================
+      // P6 SKOR AKHIR
+      // =================================================
+
+      const skorAkhirP6 =
+        skorRisiko - skorProtektif;
+
+
+      const hasilP6 =
+        skorAkhirP6 > 10
+          ? 1
+          : 0;
+
+
+      // =================================================
+      // P7 - OBESITAS
+      // =================================================
+
+      const p7Berat =
+        document.getElementById(
+          'p7_berat_badan'
+        ).value;
+
+      const p7Tinggi =
+        document.getElementById(
+          'p7_tinggi_badan'
+        ).value;
+
+      const p7Bmi =
+        document.getElementById(
+          'p7_bmi'
+        ).value;
+
+
+      if (!p7Berat || !p7Tinggi || !p7Bmi) {
+        form.reportValidity();
+        return;
+      }
+
+
+      // =================================================
+      // P9 - STRES
+      // =================================================
+
+      const p9 = [];
+
+      for (let i = 1; i <= 7; i++) {
+
+        const selected = document.querySelector(
+          `input[name="p9_${i}"]:checked`
         );
 
-        const p5Obat = document.querySelector(
-            'input[name="p5_obat_tidur"]:checked'
+        if (!selected) {
+          form.reportValidity();
+          return;
+        }
+
+        p9.push(
+          parseInt(selected.value)
+        );
+      }
+
+
+      // =================================================
+      // P9
+      // Python:
+      // skor = jumlah 7 item
+      // skor_total = skor * 2
+      // =================================================
+
+      const skorP9 =
+        p9.reduce(
+          (total, nilai) => total + nilai,
+          0
         );
 
+      const skorTotalP9 =
+        skorP9 * 2;
 
-        const jamTidur =
-            document.querySelector(
-                'input[name="p5_jam_tidur"]'
-            ).value;
+      const hasilP9 =
+        skorTotalP9 > 18
+          ? 1
+          : 0;
 
-        const jamBangun =
-            document.querySelector(
-                'input[name="p5_jam_bangun"]'
-            ).value;
 
-        const tidurNyenyak =
-            document.querySelector(
-                'input[name="p5_tidur_nyenyak"]'
-            ).value;
+      // =================================================
+      // TAMPILKAN DATA KE MODAL
+      // =================================================
 
+      document.getElementById(
+        'confirm_nama'
+      ).textContent = nama;
 
-        const p5Efisiensi =
-            document.getElementById('p5_efisiensi').value;
 
+      // =================================================
+      // P1
+      // =================================================
 
-        // =================================================
-        // VALIDASI P5
-        // =================================================
+      document.getElementById(
+        'confirm_p1'
+      ).textContent = p1;
 
-        if (
-            !p5Kualitas ||
-            !p5Latensi ||
-            !p5Kesulitan ||
-            !p5Durasi ||
-            !p5Obat ||
-            !jamTidur ||
-            !jamBangun ||
-            !tidurNyenyak
-        ) {
-            form.reportValidity();
-            return;
-        }
-
 
-        if (!p5Efisiensi) {
-            alert(
-                'Silakan isi jam tidur, jam bangun, dan durasi tidur aktual terlebih dahulu agar efisiensi tidur dapat dihitung.'
-            );
-            return;
-        }
-
-
-        // =================================================
-        // P5 - GANGGUAN TIDUR
-        // =================================================
+      // =================================================
+      // P2
+      // =================================================
 
-        const p5Gangguan = [];
-
-        const daftarGangguan = [
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g'
-        ];
+      document.getElementById(
+        'confirm_p2'
+      ).textContent =
+        p2 === '1'
+          ? 'Ya, kehamilan pertama'
+          : 'Tidak, sudah pernah hamil sebelumnya';
 
-        for (const item of daftarGangguan) {
 
-            const selected = document.querySelector(
-                `input[name="p5_gangguan_${item}"]:checked`
-            );
+      // =================================================
+      // P3
+      // =================================================
 
-            if (!selected) {
-                form.reportValidity();
-                return;
-            }
+      document.getElementById(
+        'confirm_p3'
+      ).textContent =
+        p3 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
 
-            p5Gangguan.push(
-                parseInt(selected.value)
-            );
-        }
 
+      // =================================================
+      // P4
+      // =================================================
 
-        // =================================================
-        // P5 - FUNGSI SIANG
-        // =================================================
+      document.getElementById(
+        'confirm_p4'
+      ).textContent =
+        p4 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
 
-        const p5Siang = [];
 
-        for (let i = 1; i <= 2; i++) {
+      // =================================================
+      // P5
+      // =================================================
 
-            const selected = document.querySelector(
-                `input[name="p5_siang_${i}"]:checked`
-            );
+      document.getElementById(
+        'confirm_p5_kualitas'
+      ).textContent =
+        p5Kualitas.value;
 
-            if (!selected) {
-                form.reportValidity();
-                return;
-            }
-
-            p5Siang.push(
-                parseInt(selected.value)
-            );
-        }
-
-
-        // =================================================
-        // HITUNG P5
-        // HARUS SAMA DENGAN PYTHON
-        // =================================================
-
-        const skorKualitas =
-            parseInt(p5Kualitas.value);
-
-        const skorLatensi =
-            (
-                parseInt(p5Latensi.value) +
-                parseInt(p5Kesulitan.value)
-            ) / 2;
-
-        const skorDurasi =
-            parseInt(p5Durasi.value);
-
-        const skorEfisiensi =
-            parseInt(p5Efisiensi);
-
-        const skorGangguan =
-            p5Gangguan.reduce(
-                (total, nilai) => total + nilai,
-                0
-            ) / 7;
-
-        const skorObat =
-            parseInt(p5Obat.value);
 
-        const skorSiang =
-            p5Siang.reduce(
-                (total, nilai) => total + nilai,
-                0
-            ) / 2;
-
-
-        const skorP5 =
-            skorKualitas +
-            skorLatensi +
-            skorDurasi +
-            skorEfisiensi +
-            skorGangguan +
-            skorObat +
-            skorSiang;
-
-
-        const kategoriP5 =
-            skorP5 > 5
-                ? 'Kualitas istirahat buruk'
-                : 'Kualitas istirahat baik';
-
-
-        // =================================================
-        // P6 - POLA MAKAN
-        // HARUS SAMA DENGAN PYTHON
-        // =================================================
+      document.getElementById(
+        'confirm_p5_latensi'
+      ).textContent =
+        p5Latensi.value;
 
-        const p6 = [];
 
-        for (let i = 1; i <= 17; i++) {
+      document.getElementById(
+        'confirm_p5_kesulitan'
+      ).textContent =
+        p5Kesulitan.value;
 
-            const selected = document.querySelector(
-                `input[name="p6_${i}"]:checked`
-            );
 
-            if (!selected) {
-                form.reportValidity();
-                return;
-            }
+      document.getElementById(
+        'confirm_p5_durasi'
+      ).textContent =
+        p5Durasi.value;
 
-            p6.push(
-                parseInt(selected.value)
-            );
-        }
 
+      document.getElementById(
+        'confirm_p5_jam_tidur'
+      ).textContent =
+        jamTidur;
 
-        // =================================================
-        // P6 RISIKO
-        //
-        // p6_1 sampai p6_8
-        // + p6_16
-        // =================================================
 
-        const skorRisiko =
-            p6[0] +
-            p6[1] +
-            p6[2] +
-            p6[3] +
-            p6[4] +
-            p6[5] +
-            p6[6] +
-            p6[7] +
-            p6[15];
+      document.getElementById(
+        'confirm_p5_jam_bangun'
+      ).textContent =
+        jamBangun;
 
 
-        // =================================================
-        // P6 PROTEKTIF
-        //
-        // p6_9 sampai p6_15
-        // + p6_17
-        // =================================================
+      document.getElementById(
+        'confirm_p5_tidur_nyenyak'
+      ).textContent =
+        tidurNyenyak + ' jam';
 
-        const skorProtektif =
-            p6[8] +
-            p6[9] +
-            p6[10] +
-            p6[11] +
-            p6[12] +
-            p6[13] +
-            p6[14] +
-            p6[16];
 
+      document.getElementById(
+        'confirm_p5_efisiensi'
+      ).textContent =
+        p5Efisiensi;
 
-        // =================================================
-        // P6 SKOR AKHIR
-        // =================================================
 
-        const skorAkhirP6 =
-            skorRisiko - skorProtektif;
+      document.getElementById(
+        'confirm_p5_gangguan'
+      ).textContent =
+        skorGangguan.toFixed(2);
 
 
-        const hasilP6 =
-            skorAkhirP6 > 10
-                ? 1
-                : 0;
+      document.getElementById(
+        'confirm_p5_obat'
+      ).textContent =
+        p5Obat.value;
 
 
-        // =================================================
-        // P7 - OBESITAS
-        // =================================================
+      document.getElementById(
+        'confirm_p5_siang'
+      ).textContent =
+        skorSiang.toFixed(2);
 
-        const p7Berat =
-            document.getElementById(
-                'p7_berat_badan'
-            ).value;
 
-        const p7Tinggi =
-            document.getElementById(
-                'p7_tinggi_badan'
-            ).value;
+      document.getElementById(
+        'confirm_p5_total'
+      ).textContent =
+        skorP5.toFixed(2);
 
-        const p7Bmi =
-            document.getElementById(
-                'p7_bmi'
-            ).value;
 
+      document.getElementById(
+        'confirm_p5_kategori'
+      ).textContent =
+        kategoriP5;
 
-        if (!p7Berat || !p7Tinggi || !p7Bmi) {
-            form.reportValidity();
-            return;
-        }
 
+      // =================================================
+      // P6
+      // =================================================
 
-        // =================================================
-        // P9 - STRES
-        // =================================================
-
-        const p9 = [];
-
-        for (let i = 1; i <= 7; i++) {
-
-            const selected = document.querySelector(
-                `input[name="p9_${i}"]:checked`
-            );
-
-            if (!selected) {
-                form.reportValidity();
-                return;
-            }
-
-            p9.push(
-                parseInt(selected.value)
-            );
-        }
-
-
-        // =================================================
-        // P9
-        // Python:
-        // skor = jumlah 7 item
-        // skor_total = skor * 2
-        // =================================================
-
-        const skorP9 =
-            p9.reduce(
-                (total, nilai) => total + nilai,
-                0
-            );
-
-        const skorTotalP9 =
-            skorP9 * 2;
-
-        const hasilP9 =
-            skorTotalP9 > 18
-                ? 1
-                : 0;
-
-
-        // =================================================
-        // TAMPILKAN DATA KE MODAL
-        // =================================================
-
+      const detailP6 =
         document.getElementById(
-            'confirm_nama'
-        ).textContent = nama;
+          'confirm_p6_detail'
+        );
 
+      let htmlP6 = '';
 
-        // =================================================
-        // P1
-        // =================================================
+      p6.forEach((nilai, index) => {
 
-        document.getElementById(
-            'confirm_p1'
-        ).textContent = p1;
-
-
-        // =================================================
-        // P2
-        // =================================================
-
-        document.getElementById(
-            'confirm_p2'
-        ).textContent =
-            p2 === '1'
-                ? 'Ya, kehamilan pertama'
-                : 'Tidak, sudah pernah hamil sebelumnya';
-
-
-        // =================================================
-        // P3
-        // =================================================
-
-        document.getElementById(
-            'confirm_p3'
-        ).textContent =
-            p3 === '1'
-                ? 'Ada'
-                : 'Tidak ada';
-
-
-        // =================================================
-        // P4
-        // =================================================
-
-        document.getElementById(
-            'confirm_p4'
-        ).textContent =
-            p4 === '1'
-                ? 'Ada'
-                : 'Tidak ada';
-
-
-        // =================================================
-        // P5
-        // =================================================
-
-        document.getElementById(
-            'confirm_p5_kualitas'
-        ).textContent =
-            p5Kualitas.value;
-
-
-        document.getElementById(
-            'confirm_p5_latensi'
-        ).textContent =
-            p5Latensi.value;
-
-
-        document.getElementById(
-            'confirm_p5_kesulitan'
-        ).textContent =
-            p5Kesulitan.value;
-
-
-        document.getElementById(
-            'confirm_p5_durasi'
-        ).textContent =
-            p5Durasi.value;
-
-
-        document.getElementById(
-            'confirm_p5_jam_tidur'
-        ).textContent =
-            jamTidur;
-
-
-        document.getElementById(
-            'confirm_p5_jam_bangun'
-        ).textContent =
-            jamBangun;
-
-
-        document.getElementById(
-            'confirm_p5_tidur_nyenyak'
-        ).textContent =
-            tidurNyenyak + ' jam';
-
-
-        document.getElementById(
-            'confirm_p5_efisiensi'
-        ).textContent =
-            p5Efisiensi;
-
-
-        document.getElementById(
-            'confirm_p5_gangguan'
-        ).textContent =
-            skorGangguan.toFixed(2);
-
-
-        document.getElementById(
-            'confirm_p5_obat'
-        ).textContent =
-            p5Obat.value;
-
-
-        document.getElementById(
-            'confirm_p5_siang'
-        ).textContent =
-            skorSiang.toFixed(2);
-
-
-        document.getElementById(
-            'confirm_p5_total'
-        ).textContent =
-            skorP5.toFixed(2);
-
-
-        document.getElementById(
-            'confirm_p5_kategori'
-        ).textContent =
-            kategoriP5;
-
-
-        // =================================================
-        // P6
-        // =================================================
-
-        const detailP6 =
-            document.getElementById(
-                'confirm_p6_detail'
-            );
-
-        let htmlP6 = '';
-
-        p6.forEach((nilai, index) => {
-
-            htmlP6 += `
+        htmlP6 += `
                 <div>
                     Item ${index + 1}:
                     <strong>${nilai}</strong>
                 </div>
             `;
 
-        });
+      });
 
-        htmlP6 += `
+      htmlP6 += `
             <hr>
 
             <div>
@@ -2097,60 +2088,60 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
 
-        detailP6.innerHTML = htmlP6;
+      detailP6.innerHTML = htmlP6;
 
 
+      document.getElementById(
+        'confirm_p6_total'
+      ).textContent =
+        skorAkhirP6;
+
+
+      // =================================================
+      // P7
+      // =================================================
+
+      document.getElementById(
+        'confirm_p7_berat'
+      ).textContent =
+        p7Berat;
+
+
+      document.getElementById(
+        'confirm_p7_tinggi'
+      ).textContent =
+        p7Tinggi;
+
+
+      document.getElementById(
+        'confirm_p7_bmi'
+      ).textContent =
+        p7Bmi;
+
+
+      // =================================================
+      // P9
+      // =================================================
+
+      const detailP9 =
         document.getElementById(
-            'confirm_p6_total'
-        ).textContent =
-            skorAkhirP6;
+          'confirm_p9_detail'
+        );
 
+      let htmlP9 = '';
 
-        // =================================================
-        // P7
-        // =================================================
+      p9.forEach((nilai, index) => {
 
-        document.getElementById(
-            'confirm_p7_berat'
-        ).textContent =
-            p7Berat;
-
-
-        document.getElementById(
-            'confirm_p7_tinggi'
-        ).textContent =
-            p7Tinggi;
-
-
-        document.getElementById(
-            'confirm_p7_bmi'
-        ).textContent =
-            p7Bmi;
-
-
-        // =================================================
-        // P9
-        // =================================================
-
-        const detailP9 =
-            document.getElementById(
-                'confirm_p9_detail'
-            );
-
-        let htmlP9 = '';
-
-        p9.forEach((nilai, index) => {
-
-            htmlP9 += `
+        htmlP9 += `
                 <div>
                     Item ${index + 1}:
                     <strong>${nilai}</strong>
                 </div>
             `;
 
-        });
+      });
 
-        htmlP9 += `
+      htmlP9 += `
             <hr>
 
             <div>
@@ -2169,52 +2160,52 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
 
-        detailP9.innerHTML = htmlP9;
+      detailP9.innerHTML = htmlP9;
 
 
-        document.getElementById(
-            'confirm_p9_total'
-        ).textContent =
-            skorTotalP9;
+      document.getElementById(
+        'confirm_p9_total'
+      ).textContent =
+        skorTotalP9;
 
 
-        // =================================================
-        // P10
-        // =================================================
+      // =================================================
+      // P10
+      // =================================================
 
-        document.getElementById(
-            'confirm_p10'
-        ).textContent =
-            p10 === '1'
-                ? 'Ada'
-                : 'Tidak ada';
+      document.getElementById(
+        'confirm_p10'
+      ).textContent =
+        p10 === '1'
+          ? 'Ada'
+          : 'Tidak ada';
 
 
-        // =================================================
-        // P11
-        // =================================================
+      // =================================================
+      // P11
+      // =================================================
 
-        document.getElementById(
-            'confirm_p11'
-        ).textContent =
-            p11;
+      document.getElementById(
+        'confirm_p11'
+      ).textContent =
+        p11;
 
-        // =================================================
-        // P12
-        // =================================================
+      // =================================================
+      // P12
+      // =================================================
 
-        document.getElementById(
-            'confirm_p12'
-        ).textContent =
-            p12 === '1'
-                ? 'Ya'
-                : 'Tidak';
+      document.getElementById(
+        'confirm_p12'
+      ).textContent =
+        p12 === '1'
+          ? 'Ya'
+          : 'Tidak';
 
-        // =================================================
-        // TAMPILKAN MODAL
-        // =================================================
+      // =================================================
+      // TAMPILKAN MODAL
+      // =================================================
 
-        modalKonfirmasi.show();
+      modalKonfirmasi.show();
 
     });
 
@@ -2224,27 +2215,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // =====================================================
 
     btnLanjutkan.addEventListener(
-        'click',
-        function () {
+      'click',
+      function () {
 
-            btnLanjutkan.blur();
+        btnLanjutkan.blur();
 
-            modalKonfirmasi.hide();
+        modalKonfirmasi.hide();
 
-            modalElement.addEventListener(
-                'hidden.bs.modal',
-                function () {
+        modalElement.addEventListener(
+          'hidden.bs.modal',
+          function () {
 
-                    form.submit();
+            form.submit();
 
-                },
-                { once: true }
-            );
+          },
+          { once: true }
+        );
 
-        }
+      }
     );
 
-});
+  });
 </script>
 
 <script>
@@ -2253,37 +2244,37 @@ document.addEventListener('DOMContentLoaded', function () {
     {% if hasil_prediksi %}
 
     const modalElement =
-        document.getElementById('modalHasilPrediksi');
+      document.getElementById('modalHasilPrediksi');
 
     if (modalElement) {
 
-        const modalHasilPrediksi =
-            new bootstrap.Modal(modalElement, {
-                backdrop: true,
-                keyboard: true
-            });
+      const modalHasilPrediksi =
+        new bootstrap.Modal(modalElement, {
+          backdrop: true,
+          keyboard: true
+        });
 
-        // Tampilkan modal
-        modalHasilPrediksi.show();
+      // Tampilkan modal
+      modalHasilPrediksi.show();
 
 
-        // ==========================================
-        // SETELAH MODAL DITUTUP
-        // ==========================================
+      // ==========================================
+      // SETELAH MODAL DITUTUP
+      // ==========================================
 
-        modalElement.addEventListener(
-            'hidden.bs.modal',
-            function () {
+      modalElement.addEventListener(
+        'hidden.bs.modal',
+        function () {
 
-                // Pastikan tidak ada tombol/input
-                // di dalam modal yang masih fokus
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
+          // Pastikan tidak ada tombol/input
+          // di dalam modal yang masih fokus
+          if (document.activeElement) {
+            document.activeElement.blur();
+          }
 
-            },
-            { once: true }
-        );
+        },
+        { once: true }
+      );
 
     }
 
