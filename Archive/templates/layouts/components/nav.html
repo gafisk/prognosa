@@ -1,0 +1,11 @@
+<ul>
+  <li>
+    <a
+      href="{{ url_for('index' ) }}"
+      class="{% if request.path == url_for('index') %}active{% endif %}"
+    >
+      Home
+    </a>
+  </li>
+</ul>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

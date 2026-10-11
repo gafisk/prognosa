@@ -6,7 +6,6 @@
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
     <h2>PREDIKSI</h2>
-    <p>Penyakit Prognosis</p>
   </div>
   <!-- End Section Title -->
 
@@ -191,8 +190,6 @@
                     <td>
                       Rata-rata berapa menit waktu yang dibutuhkan
                       untuk tertidur setelah berbaring?
-                      <input type="number" class="form-control mt-2" name="p5_menit_tidur" placeholder="Menit" min="0"
-                        required>
                     </td>
 
                     <td class="text-center">
@@ -286,11 +283,10 @@
                     <td>
                       Jam berapa Anda biasanya mulai tidur
                       di malam hari?
-                      <input type="time" class="form-control mt-2" name="p5_jam_tidur" required>
                     </td>
 
                     <td colspan="4" class="text-center">
-                      Digunakan untuk menghitung efisiensi tidur
+                      <input type="time" class="form-control mt-2" name="p5_jam_tidur" required>
                     </td>
                   </tr>
 
@@ -302,11 +298,10 @@
                     <td>
                       Jam berapa Anda biasanya bangun
                       di pagi hari?
-                      <input type="time" class="form-control mt-2" name="p5_jam_bangun" required>
                     </td>
 
                     <td colspan="4" class="text-center">
-                      Digunakan untuk menghitung efisiensi tidur
+                      <input type="time" class="form-control mt-2" name="p5_jam_bangun" required>
                     </td>
                   </tr>
 
@@ -316,13 +311,12 @@
                     <td class="text-center">7</td>
 
                     <td>
-                      Berapa jam Anda benar-benar tidur rata-rata setiap malam?
-                      <input type="number" step="0.1" class="form-control mt-2" name="p5_tidur_nyenyak"
-                        placeholder="Jam" min="0" required>
+                      Berapa lama anda tidur nyenyak dalam semalam?
                     </td>
 
                     <td colspan="4" class="text-center">
-                      Digunakan untuk menghitung efisiensi tidur
+                      <input type="number" step="0.1" class="form-control mt-2" name="p5_tidur_nyenyak"
+                        placeholder="Jam" min="0" required>
                     </td>
                   </tr>
 
@@ -333,9 +327,6 @@
 
                     <td>
                       <strong>Efisiensi tidur</strong><br>
-                      <small class="text-muted">
-                        (durasi tidur aktual / total waktu di tempat tidur) × 100%
-                      </small>
                     </td>
 
                     <td colspan="4" class="text-center">
@@ -1227,11 +1218,10 @@
                       <strong>Total skor:
                         <span id="confirm_p5_total"></span>
                       </strong>
-                    </div>
-
-                    <div>
-                      Kategori:
-                      <strong id="confirm_p5_kategori"></strong>
+                      <br>
+                      <strong>Kategori Pola Istirahat:
+                        <span id="confirm_p5_kategori"></span>
+                      </strong>
                     </div>
 
                   </td>
@@ -1510,28 +1500,23 @@
       // ============================
 
       let skor;
-      let kategori;
 
 
       if (efisiensi >= 85) {
 
         skor = 0;
-        kategori = '≥85%';
 
       } else if (efisiensi >= 75) {
 
         skor = 1;
-        kategori = '75–84%';
 
       } else if (efisiensi >= 65) {
 
         skor = 2;
-        kategori = '65–74%';
 
       } else {
 
         skor = 3;
-        kategori = '<65%';
       }
 
 
@@ -1542,8 +1527,6 @@
       hasilEfisiensi.textContent =
         efisiensi.toFixed(2) + '%';
 
-      kategoriEfisiensi.textContent =
-        kategori;
 
       // Kirim skor 0–3 ke Python
       inputEfisiensi.value = skor;
@@ -2057,66 +2040,53 @@
       ).textContent =
         skorP5.toFixed(2);
 
-
-      document.getElementById(
-        'confirm_p5_kategori'
-      ).textContent =
-        kategoriP5;
+      document.getElementById('confirm_p5_kategori').textContent =
+        skorP5 <= 5
+            ? 'Kualitas istirahat baik'
+            : 'Kualitas istirahat buruk';
 
 
       // =================================================
       // P6
       // =================================================
 
-      const detailP6 =
-        document.getElementById(
-          'confirm_p6_detail'
-        );
+      const detailP6 = document.getElementById('confirm_p6_detail');
 
-      let htmlP6 = '';
+      let htmlP6 = `
+          <div>
+              <strong>Skor risiko:</strong>
+              ${skorRisiko}
+          </div>
 
-      p6.forEach((nilai, index) => {
+          <div>
+              <strong>Skor protektif:</strong>
+              ${skorProtektif}
+          </div>
 
-        htmlP6 += `
-                <div>
-                    Item ${index + 1}:
-                    <strong>${nilai}</strong>
-                </div>
-            `;
+          <div>
+              <strong>Skor akhir:</strong>
+              ${skorAkhirP6}
+          </div>
 
-      });
+          <div>
+              <strong>Klasifikasi P6:</strong>
+              ${hasilP6}
+          </div>
 
-      htmlP6 += `
-            <hr>
+          <hr>
 
-            <div>
-                <strong>Skor risiko:</strong>
-                ${skorRisiko}
-            </div>
-
-            <div>
-                <strong>Skor protektif:</strong>
-                ${skorProtektif}
-            </div>
-
-            <div>
-                <strong>Skor akhir:</strong>
-                ${skorAkhirP6}
-            </div>
-
-            <div>
-                <strong>Klasifikasi P6:</strong>
-                ${hasilP6}
-            </div>
-        `;
+          <div>
+              <strong>Kategori pola makan:</strong>
+              ${skorAkhirP6 <= 10
+                  ? 'Pola makan sehat'
+                  : 'Pola makan berisiko'}
+          </div>
+      `;
 
       detailP6.innerHTML = htmlP6;
 
-
-      document.getElementById(
-        'confirm_p6_total'
-      ).textContent =
-        skorAkhirP6;
+      document.getElementById('confirm_p6_total').textContent =
+          skorAkhirP6;
 
 
       // =================================================
@@ -2145,50 +2115,38 @@
       // P9
       // =================================================
 
-      const detailP9 =
-        document.getElementById(
-          'confirm_p9_detail'
-        );
+      const detailP9 = document.getElementById('confirm_p9_detail');
 
-      let htmlP9 = '';
+      let htmlP9 = `
+          <div>
+              <strong>Skor sebelum dikali 2:</strong>
+              ${skorP9}
+          </div>
 
-      p9.forEach((nilai, index) => {
+          <div>
+              <strong>Skor DASS-21:</strong>
+              ${skorTotalP9}
+          </div>
 
-        htmlP9 += `
-                <div>
-                    Item ${index + 1}:
-                    <strong>${nilai}</strong>
-                </div>
-            `;
+          <div>
+              <strong>Klasifikasi P9:</strong>
+              ${hasilP9}
+          </div>
 
-      });
+          <hr>
 
-      htmlP9 += `
-            <hr>
-
-            <div>
-                <strong>Skor sebelum dikali 2:</strong>
-                ${skorP9}
-            </div>
-
-            <div>
-                <strong>Skor DASS-21:</strong>
-                ${skorTotalP9}
-            </div>
-
-            <div>
-                <strong>Klasifikasi P9:</strong>
-                ${hasilP9}
-            </div>
-        `;
+          <div>
+              <strong>Kategori stres:</strong>
+              ${skorTotalP9 <= 18
+                  ? 'Stres Ringan/ Normal'
+                  : 'Stres Tinggi'}
+          </div>
+      `;
 
       detailP9.innerHTML = htmlP9;
 
-
-      document.getElementById(
-        'confirm_p9_total'
-      ).textContent =
-        skorTotalP9;
+      document.getElementById('confirm_p9_total').textContent =
+          skorTotalP9;
 
 
       // =================================================
