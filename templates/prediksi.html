@@ -1156,74 +1156,7 @@
                 <tr>
                   <th>Pola Istirahat</th>
                   <td>
-
-                    <div>
-                      Kualitas tidur:
-                      <strong id="confirm_p5_kualitas"></strong>
-                    </div>
-
-                    <div>
-                      Latensi tidur:
-                      <strong id="confirm_p5_latensi"></strong>
-                    </div>
-
-                    <div>
-                      Kesulitan tidur:
-                      <strong id="confirm_p5_kesulitan"></strong>
-                    </div>
-
-                    <div>
-                      Durasi tidur:
-                      <strong id="confirm_p5_durasi"></strong>
-                    </div>
-
-                    <div>
-                      Jam mulai tidur:
-                      <strong id="confirm_p5_jam_tidur"></strong>
-                    </div>
-
-                    <div>
-                      Jam bangun:
-                      <strong id="confirm_p5_jam_bangun"></strong>
-                    </div>
-
-                    <div>
-                      Durasi tidur aktual:
-                      <strong id="confirm_p5_tidur_nyenyak"></strong>
-                    </div>
-
-                    <div>
-                      Efisiensi tidur:
-                      <strong id="confirm_p5_efisiensi"></strong>
-                    </div>
-
-                    <div>
-                      Skor gangguan tidur:
-                      <strong id="confirm_p5_gangguan"></strong>
-                    </div>
-
-                    <div>
-                      Penggunaan obat tidur:
-                      <strong id="confirm_p5_obat"></strong>
-                    </div>
-
-                    <div>
-                      Fungsi siang hari:
-                      <strong id="confirm_p5_siang"></strong>
-                    </div>
-
-                    <hr>
-
-                    <div>
-                      <strong>Total skor:
-                        <span id="confirm_p5_total"></span>
-                      </strong>
-                      <br>
-                      <strong>Kategori Pola Istirahat:
-                        <span id="confirm_p5_kategori"></span>
-                      </strong>
-                    </div>
-
+                    <div id="confirm_p5_detail"></div>
                   </td>
                 </tr>
 
@@ -1232,10 +1165,6 @@
                   <th>Pola Makan</th>
                   <td>
                     <div id="confirm_p6_detail"></div>
-
-                    <div class="mt-2">
-                      <strong>Total skor pola makan: <span id="confirm_p6_total"></span></strong>
-                    </div>
                   </td>
                 </tr>
 
@@ -1253,9 +1182,16 @@
                       <span id="confirm_p7_tinggi"></span> cm
                     </div>
 
+                    <hr>
+
                     <div>
                       <strong>IMT:</strong>
                       <span id="confirm_p7_bmi"></span> kg/m²
+                    </div>
+
+                    <div>
+                      <strong>Klasifikasi IMT:</strong>
+                      <span id="confirm_p7_klasifikasi"></span>
                     </div>
                   </td>
                 </tr>
@@ -1265,9 +1201,6 @@
                   <th>Stres</th>
                   <td>
                     <div id="confirm_p9_detail"></div>
-                    <div class="mt-2">
-                      <strong>Total skor stres: <span id="confirm_p9_total"></span></strong>
-                    </div>
                   </td>
                 </tr>
 
@@ -1351,7 +1284,9 @@
           <div class="modal-body text-center">
 
             <div class="mb-3">
-              <i class="bi bi-check-circle-fill" style="font-size: 60px; color: {% if hasil_prediksi == 'Risiko Tinggi' %}red{% elif hasil_prediksi == 'Risiko Rendah' %}green{% endif %};"> </i>
+              <i class="bi bi-check-circle-fill"
+                style="font-size: 60px; color: {% if hasil_prediksi == 'Risiko Tinggi' %}red{% elif hasil_prediksi == 'Risiko Rendah' %}green{% endif %};">
+              </i>
             </div>
 
             <h3 class="mb-3">
@@ -1965,85 +1900,89 @@
           : 'Tidak ada';
 
 
+
       // =================================================
       // P5
       // =================================================
 
-      document.getElementById(
-        'confirm_p5_kualitas'
-      ).textContent =
-        p5Kualitas.value;
+      const detailP5 = document.getElementById('confirm_p5_detail');
+
+      let htmlP5 = `
+      <!--
+          <div>
+              Kualitas tidur:
+              <strong>${p5Kualitas.value}</strong>
+          </div>
+
+          <div>
+              Latensi tidur:
+              <strong>${p5Latensi.value}</strong>
+          </div>
+
+          <div>
+              Kesulitan tidur:
+              <strong>${p5Kesulitan.value}</strong>
+          </div>
+
+          <div>
+              Durasi tidur:
+              <strong>${p5Durasi.value}</strong>
+          </div> -->
+
+          <div>
+              Jam mulai tidur:
+              <strong>${jamTidur}</strong>
+          </div>
+
+          <div>
+              Jam bangun:
+              <strong>${jamBangun}</strong>
+          </div>
+
+          <div>
+              Durasi tidur aktual:
+              <strong>${tidurNyenyak} jam</strong>
+          </div>
 
 
-      document.getElementById(
-        'confirm_p5_latensi'
-      ).textContent =
-        p5Latensi.value;
+          <!--
+          <div>
+              Efisiensi tidur:
+              <strong>${p5Efisiensi}</strong>
+          </div> -->
 
+          <div>
+              Skor gangguan tidur:
+              <strong>${skorGangguan.toFixed(2)}</strong>
+          </div>
 
-      document.getElementById(
-        'confirm_p5_kesulitan'
-      ).textContent =
-        p5Kesulitan.value;
+          <!--
+          <div>
+              Penggunaan obat tidur:
+              <strong>${p5Obat.value}</strong>
+          </div>
 
+          <div>
+              Fungsi siang hari:
+              <strong>${skorSiang.toFixed(2)}</strong>
+          </div> -->
 
-      document.getElementById(
-        'confirm_p5_durasi'
-      ).textContent =
-        p5Durasi.value;
+          <hr>
 
+          <div>
+              <strong>Total skor:</strong>
+              ${skorP5.toFixed(2)}
+          </div>
 
-      document.getElementById(
-        'confirm_p5_jam_tidur'
-      ).textContent =
-        jamTidur;
+          <div>
+              <strong>Kategori Pola Istirahat:</strong>
+              ${skorP5 <= 5
+          ? 'Kualitas istirahat baik'
+          : 'Kualitas istirahat buruk'}
+          </div>
+      `;
 
-
-      document.getElementById(
-        'confirm_p5_jam_bangun'
-      ).textContent =
-        jamBangun;
-
-
-      document.getElementById(
-        'confirm_p5_tidur_nyenyak'
-      ).textContent =
-        tidurNyenyak + ' jam';
-
-
-      document.getElementById(
-        'confirm_p5_efisiensi'
-      ).textContent =
-        p5Efisiensi;
-
-
-      document.getElementById(
-        'confirm_p5_gangguan'
-      ).textContent =
-        skorGangguan.toFixed(2);
-
-
-      document.getElementById(
-        'confirm_p5_obat'
-      ).textContent =
-        p5Obat.value;
-
-
-      document.getElementById(
-        'confirm_p5_siang'
-      ).textContent =
-        skorSiang.toFixed(2);
-
-
-      document.getElementById(
-        'confirm_p5_total'
-      ).textContent =
-        skorP5.toFixed(2);
-
-      document.getElementById('confirm_p5_kategori').textContent =
-        skorP5 <= 5
-            ? 'Kualitas istirahat baik'
-            : 'Kualitas istirahat buruk';
+      detailP5.innerHTML = htmlP5;
 
 
       // =================================================
@@ -2068,26 +2007,22 @@
               ${skorAkhirP6}
           </div>
 
-          <div>
-              <strong>Klasifikasi P6:</strong>
-              ${hasilP6}
-          </div>
-
           <hr>
+
+          <div>
+              <strong>Total skor pola makan:</strong>
+              ${skorAkhirP6}
+          </div>
 
           <div>
               <strong>Kategori pola makan:</strong>
               ${skorAkhirP6 <= 10
-                  ? 'Pola makan sehat'
-                  : 'Pola makan berisiko'}
+          ? 'Pola makan sehat'
+          : 'Pola makan berisiko'}
           </div>
       `;
 
       detailP6.innerHTML = htmlP6;
-
-      document.getElementById('confirm_p6_total').textContent =
-          skorAkhirP6;
-
 
       // =================================================
       // P7
@@ -2110,6 +2045,11 @@
       ).textContent =
         p7Bmi;
 
+      document.getElementById('confirm_p7_klasifikasi').textContent =
+        p7Bmi < 30
+          ? 'Tidak obesitas'
+          : 'Obesitas';
+
 
       // =================================================
       // P9
@@ -2128,26 +2068,22 @@
               ${skorTotalP9}
           </div>
 
-          <div>
-              <strong>Klasifikasi P9:</strong>
-              ${hasilP9}
-          </div>
-
           <hr>
+
+          <div>
+              <strong>Total skor stres:</strong>
+              ${skorTotalP9}
+          </div>
 
           <div>
               <strong>Kategori stres:</strong>
               ${skorTotalP9 <= 18
-                  ? 'Stres Ringan/ Normal'
-                  : 'Stres Tinggi'}
+          ? 'Stres Ringan/ Normal'
+          : 'Stres Tinggi'}
           </div>
       `;
 
       detailP9.innerHTML = htmlP9;
-
-      document.getElementById('confirm_p9_total').textContent =
-          skorTotalP9;
-
 
       // =================================================
       // P10
